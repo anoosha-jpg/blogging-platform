@@ -20,18 +20,18 @@ body {
 .blog-detail-card,
 #add-edit-blog,
 header {
-    background: rgba(255,255,255,0.85);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     /* background-color: #E9B3FB; */
     /* border-radius: 20px; */
     outline: none;
     box-shadow:
-        0 20px 40px rgba(0,0,0,0.15),
-        inset 0 1px 0 rgba(255,255,255,0.6);
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
-.header-actions button{
+.header-actions button {
     margin: 6px;
 }
 
@@ -42,7 +42,7 @@ header {
     padding: 40px;
     background: white;
     border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
@@ -59,6 +59,7 @@ header {
     border: 1px solid #ddd;
     border-radius: 10px;
     font-size: 16px;
+    border: none;
 }
 
 .auth-container button {
@@ -76,20 +77,22 @@ header {
 
 .auth-container button:hover {
     transform: translateY(-2px);
-} 
+}
 
 
 /* 🧊 INPUTS */
-input, textarea, select {
+input,
+textarea,
+select {
     width: 100%;
     padding: 14px;
     margin: 10px 0;
     border-radius: 12px;
     border: 1px solid #ddd;
-    background: rgba(255,255,255,0.85);
+    background: rgba(255, 255, 255, 0.85);
     box-shadow:
-        inset 0 2px 6px rgba(0,0,0,0.08),
-        0 6px 15px rgba(0,0,0,0.08);
+        inset 0 2px 6px rgba(0, 0, 0, 0.08),
+        0 6px 15px rgba(0, 0, 0, 0.08);
     font-size: 15px;
     outline: none;
 }
@@ -99,7 +102,7 @@ textarea:focus,
 select:focus {
     outline: none;
     border-color: #7c3aed;
-    box-shadow: 0 0 0 3px rgba(124,58,237,0.35);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.35);
 }
 
 .search-filter {
@@ -110,20 +113,22 @@ select:focus {
     display: flex;
     gap: 15px;
     outline: none;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255, 255, 255, 0.8);
     box-shadow:
-        0 15px 30px rgba(0,0,0,0.15),
-        inset 0 1px 0 rgba(255,255,255,0.4);
+        0 15px 30px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
     flex-wrap: wrap;
-}                           
+}
 
-.search-filter input, .search-filter select {
+.search-filter input,
+.search-filter select {
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 10px;
     flex: 1;
     min-width: 200px;
 }
+
 /* 🌟 BUTTONS */
 button {
     position: relative;
@@ -148,12 +153,10 @@ button::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,0.45),
-        transparent
-    );
+    background: linear-gradient(120deg,
+            transparent,
+            rgba(255, 255, 255, 0.45),
+            transparent);
     transform: translateX(-100%);
     transition: 0.5s;
 }
@@ -199,12 +202,10 @@ header {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,0.45),
-        transparent
-    );
+    background: linear-gradient(120deg,
+            transparent,
+            rgba(255, 255, 255, 0.45),
+            transparent);
     transform: translateX(-100%);
     transition: 0.6s;
 }
@@ -252,7 +253,7 @@ header {
 #back-to-list {
     display: block;
     margin: 20px auto;
-} 
+}
 
 .actions button {
     margin: 5px;
@@ -271,37 +272,36 @@ header {
     display: block;
 }
 
-#blog-title ,
+#blog-title,
 #blog-text,
 #cover-image,
-#blog-category
-{
-   border: none;
+#blog-category {
+    border: none;
 }
 
 #publish,
-#cancel-blog{
+#cancel-blog {
     width: 100%;
     margin: 10px;
     background-color: rgba(0, 128, 0, 0.634);
 }
 
-#cancel-blog{
+#cancel-blog {
     background-color: rgba(255, 0, 0, 0.705);
 }
 
 /* 🌟 DETAIL PAGE WRAPPER */
 .blog-detail-card {
-    max-width: 780px;            
+    width: 100%;
+    max-width: 350px;
     margin: 25px auto;
-    /* padding: 50px 45px; */
     text-align: center;
-    background: rgba(255,255,255,0.88);
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(16px);
     border-radius: 26px;
     box-shadow:
-        0 30px 60px rgba(0,0,0,0.2),
-        inset 0 1px 0 rgba(255,255,255,0.6);
+        0 30px 60px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 /* 🖼 CENTER IMAGE */
@@ -309,11 +309,11 @@ header {
     display: block;
     margin: 30px auto;
     width: 100%;
-    max-width: 520px;
-    height: 500px;
+    max-width: 600px;
+    height: 700px;
     object-fit: cover;
     border-radius: 22px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
 /* 📝 TEXT CENTER + CLEAN */
@@ -330,13 +330,13 @@ header {
     font-size: 17px;
 }
 
-
 /* 💫 EMPTY STATE / NO BOOKMARKS */
 .empty-state {
     margin: 0 auto;
     text-align: center;
     font-weight: bold;
-    font-size: 28px; /* bigger font */
+    font-size: 28px;
+    /* bigger font */
     color: #ffffff;
     opacity: 0;
     animation: fadeIn 1s forwards;
@@ -349,18 +349,38 @@ header {
     color: #555;
 }
 
+
 /* Animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
+
+/* Footer */
+.site-footer{
+    margin-top:40px;
+    padding:25px 10px;
+    text-align:center;
+    /* background: linear-gradient(135deg, #9b59b6, #e056fd); */
+    background-color: #4a3b589f;
+    color:#fff;
+    font-size:14px;
+}
+
+.site-footer p{
+    margin:0;
+    opacity:0.9;
+}
+
+/* 📱 RESPONSIVE */
 @media (max-width: 768px) {
     .blog-detail-card {
         margin: 40px 20px;
@@ -368,12 +388,10 @@ header {
     }
 
     .blog-detail-card img {
-        height: 240px;
+        height: 350px;
     }
 }
 
-
-/* 📱 RESPONSIVE */
 @media (max-width: 768px) {
     header {
         flex-direction: column;
@@ -386,6 +404,7 @@ header {
     #add-edit-blog {
         margin: 20px;
         padding: 20px;
+        border-radius: 15px;
     }
 
     .blog-grid {
@@ -394,5 +413,12 @@ header {
 
     .auth-container {
         margin: 60px 20px;
+    }
+
+    #logout{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin: 10px auto;
     }
 }

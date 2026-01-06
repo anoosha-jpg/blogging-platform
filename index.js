@@ -148,81 +148,108 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Load blogs function
-    async function loadBlogs(loadMore = false) {
-        try {
-            let q;
+    //  Load blog
+    async function loadBlogs() {
+        blogList.innerHTML = '';
 
-            if (isBookmarkedView) {
-                // Bookmarked blogs
-                const bookmarksSnap = await getDocs(query(collection(db, 'bookmarks'), where('userId', '==', currentUser.uid)));
-                const blogIds = bookmarksSnap.docs.map(doc => doc.data().blogId);
+        const searchText = searchInput.value.toLowerCase().trim();
+        const selectedCategory = categoryFilter.value;
+        let q;
 
-                if (!blogIds || blogIds.length === 0) {
-                    blogList.innerHTML = `
-                        <div class="empty-state">
-                            🔖 No bookmarks yet
-                            <p>Save blogs you love 💜</p>
-                        </div>
-                    `;
-                    loadMoreBtn.style.display = 'none';
-                    return;
-                }
+        if (isBookmarkedView) {
+            const bookmarksSnap = await getDocs(
+                query(collection(db, 'bookmarks'), where('userId', '==', currentUser.uid))
+            );
 
-                q = query(collection(db, 'blogs'), where('__name__', 'in', blogIds.slice(0, 10)));
-            } else {
-                // Normal blog list
-                q = query(collection(db, 'blogs'), orderBy('date', 'desc'), limit(10));
+            const blogIds = bookmarksSnap.docs.map(d => d.data().blogId);
 
-                if (loadMore && lastVisible) q = query(q, startAfter(lastVisible));
-                if (categoryFilter.value) q = query(collection(db, 'blogs'), where('category', '==', categoryFilter.value));
-                if (sortFilter.value === 'likes') q = query(collection(db, 'blogs'), orderBy('likes', 'desc'), limit(10));
-            }
-
-            const querySnapshot = await getDocs(q);
-
-            if (querySnapshot.empty) {
+            if (blogIds.length === 0) {
                 blogList.innerHTML = `
-                    <div class="empty-state">
-                        ⚠️ No bookmark yet
-                    </div>
-                `;
-                loadMoreBtn.style.display = 'none';
+                <div class="empty-state">
+                    🔖 No bookmark yet
+                </div>
+            `;
                 return;
             }
 
-            lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-            blogList.innerHTML = loadMore ? blogList.innerHTML : '';
+            q = query(collection(db, 'blogs'), where('__name__', 'in', blogIds.slice(0, 10)));
+        } else {
+            q = query(
+                collection(db, 'blogs'),
+                orderBy('date', 'desc'),
+                limit(20)
+            );
+        }
 
-            querySnapshot.forEach((doc) => {
-                const blog = doc.data();
-                const card = document.createElement('div');
-                card.className = 'blog-card';
-                card.innerHTML = `
-                    <img src="${blog.coverImage}" alt="Cover">
-                    <h3>${blog.title}</h3>
-                    <p>${blog.content.substring(0, 100)}...</p>
-                    <p>By ${blog.author} | ${blog.category}</p>
-                    <button onclick="viewBlog('${doc.id}')">Read More</button>
-                `;
-                blogList.appendChild(card);
-            });
 
-            loadMoreBtn.style.display = querySnapshot.docs.length === 10 ? 'block' : 'none';
+        const snapshot = await getDocs(q);
 
-        } catch (error) {
-            console.error('Error loading blogs:', error);
+        if (snapshot.empty) {
             blogList.innerHTML = `
-                <div class="empty-state">
-                    ⚠️ Error loading blogs
-                </div>
-            `;
-            loadMoreBtn.style.display = 'none';
+            <div class="empty-state">⚠️ No bookmark yet</div>
+        `;
+            return;
+        }
+
+        let found = false;
+
+        snapshot.forEach(doc => {
+            const blog = doc.data();
+
+            // 🔍 SEARCH FILTER
+            const matchSearch =
+                !searchText ||
+                blog.title.toLowerCase().includes(searchText) ||
+                blog.content.toLowerCase().includes(searchText) ||
+                blog.author.toLowerCase().includes(searchText);
+
+            // 📂 CATEGORY FILTER
+            const matchCategory =
+                !selectedCategory || blog.category === selectedCategory;
+
+            if (!matchSearch || !matchCategory) return;
+
+            found = true;
+
+
+            blogList.innerHTML += `
+    <div class="blog-card">
+        <img src="${blog.coverImage}">
+
+        <h3>${blog.title}</h3>
+
+        <p>${blog.content.substring(0, 90)}...</p>
+
+            <div style="margin-top:15px; margin-bottom:15px;">
+           <small style="display:block; color:#16a34a; font-size:15px;">
+                            ✍️ Added by: ${blog.author}
+    </small>
+
+             <small style="display:block; color:#7c3aed; font-weight:600; font-size:15px;">
+                📂 Category: ${blog.category}
+           </small>
+       </div>
+
+        <!-- BUTTON -->
+        <button onclick="viewBlog('${doc.id}')">
+            Read More
+        </button>
+    </div>
+`;
+
+        });
+
+        if (!found) {
+            blogList.innerHTML = `
+            <div class="empty-state">
+                🔍 No result found
+            </div>
+        `;
         }
     }
 
     // View Blog
-    window.viewBlog = async function(id) {
+    window.viewBlog = async function (id) {
         const querySnapshot = await getDocs(query(collection(db, 'blogs'), where('__name__', '==', id)));
         const blog = querySnapshot.docs[0].data();
         blogContent.innerHTML = `
@@ -322,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     myBookmarksBtn.addEventListener('click', () => {
         isBookmarkedView = !isBookmarkedView;
-        myBookmarksBtn.textContent = isBookmarkedView ? '⭐ My Bookmarks (Viewing)' : '⭐ My Bookmarks';
+        myBookmarksBtn.textContent = isBookmarkedView ? '⭐ My Bookmarks ✔️' : '⭐ My Bookmarks';
         loadBlogs();
     });
 
