@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     myBookmarksBtn.addEventListener('click', () => {
         isBookmarkedView = !isBookmarkedView;
-        myBookmarksBtn.textContent = isBookmarkedView ? '⭐ My Bookmarks ✔️' : '⭐ My Bookmarks';
+        myBookmarksBtn.textContent = isBookmarkedView ? 'My Bookmarks ✔️' : '⭐ My Bookmarks';
         loadBlogs();
     });
 
