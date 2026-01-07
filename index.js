@@ -322,6 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
             await addDoc(collection(db, 'blogs'), blogData);
             alert('Blog added!');
         }
+        
+        blogForm.reset();
         addEditBlog.style.display = 'none';
         dashboard.style.display = 'block';
         editingBlog = false;
