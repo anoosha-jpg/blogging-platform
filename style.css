@@ -310,10 +310,9 @@ header {
     display: block;
     margin: 30px auto;
     width: 100%;
-    /* max-width: 500px; */
+    max-width: 700px;
     height: 100%;
     max-height: 500px;
-    /* height: 500px; */
     object-fit: cover;
     border-radius: 22px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
@@ -393,6 +392,7 @@ header {
 
     .blog-detail-card h2 {
         font-size: 24px;
+        margin-top: 20px;
     }
 
     .blog-detail-card p {
