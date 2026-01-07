@@ -89,13 +89,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    toggleLink.addEventListener('click', () => {
-        isSignup = !isSignup;
-        document.getElementById('auth-title').textContent = isSignup ? 'Join Us' : 'Welcome Back';
-        document.getElementById('auth-btn').textContent = isSignup ? 'Sign Up' : 'Login';
-        document.getElementById('name').style.display = isSignup ? 'block' : 'none';
-        authToggle.innerHTML = isSignup ? 'Already have an account? <a href="#" id="toggle-link">Login</a>' : 'New here? <a href="#" id="toggle-link">Sign Up</a>';
-    });
+    // toggleLink.addEventListener('click', () => {
+    //     isSignup = !isSignup;
+    //     document.getElementById('auth-title').textContent = isSignup ? 'Join Us' : 'Welcome Back';
+    //     document.getElementById('auth-btn').textContent = isSignup ? 'Sign Up' : 'Login';
+    //     document.getElementById('name').style.display = isSignup ? 'block' : 'none';
+    //     authToggle.innerHTML = isSignup ? 'Already have an account? <a href="#" id="toggle-link">Login</a>' : 'New here? <a href="#" id="toggle-link">Sign Up</a>';
+    // });
+
+//     const toggleLink = document.getElementById('toggle-link');
+// const authToggle = document.getElementById('auth-toggle');
+// let isSignup = false;
+
+function updateAuthUI() {
+    document.getElementById('auth-title').textContent = isSignup ? 'Join Us' : 'Welcome Back';
+    document.getElementById('auth-btn').textContent = isSignup ? 'Sign Up' : 'Login';
+    document.getElementById('name').style.display = isSignup ? 'block' : 'none';
+    authToggle.innerHTML = isSignup 
+        ? 'Already have an account? <a href="#" id="toggle-link">Login</a>' 
+        : 'New here? <a href="#" id="toggle-link">Sign Up</a>';
+
+    // Re-attach listener to the new link
+    document.getElementById('toggle-link').addEventListener('click', toggleForm);
+}
+
+function toggleForm(e) {
+    e.preventDefault(); // prevent page jump
+    isSignup = !isSignup;
+    updateAuthUI();
+}
+
+// Initial listener
+toggleLink.addEventListener('click', toggleForm);
 
     googleLogin.addEventListener('click', async () => {
         const provider = new GoogleAuthProvider();

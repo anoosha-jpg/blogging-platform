@@ -5,7 +5,7 @@
     font-family: 'Roboto', sans-serif;
 }
 
-/* 🌌 BACKGROUND */
+/* BACKGROUND */
 body {
     min-height: 100vh;
     /* background: radial-gradient(circle at top, #8b5cf6, #4c1d95); */
@@ -15,7 +15,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ✨ GLASS BASE */
+/* GLASS BASE */
 .auth-container,
 .blog-card,
 .blog-detail-card,
@@ -32,11 +32,28 @@ header {
         inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
-.header-actions button {
-    margin: 6px;
-}
+@media (max-width: 413px) {
+    .header-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 10px;
+        gap: 10px;
+    }
 
-/* 🔐 AUTH */
+    .header-actions button:first-child {
+        width: 100%;
+    }
+
+    .header-actions button {
+        flex: 1 1 45%;
+        margin: 0;
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+ 
+/* AUTH */
 .auth-container {
     max-width: 450px;
     margin: 100px auto;
@@ -81,7 +98,7 @@ header {
 }
 
 
-/* 🧊 INPUTS */
+/*  INPUTS */
 input,
 textarea,
 select {
@@ -130,7 +147,7 @@ select:focus {
     min-width: 200px;
 }
 
-/* 🌟 BUTTONS */
+/*  BUTTONS */
 button {
     position: relative;
     overflow: hidden;
@@ -166,7 +183,7 @@ button:hover::after {
     transform: translateX(100%);
 }
 
-/* 🧠 HEADER */
+/* HEADER */
 header {
     display: flex;
     justify-content: space-between;
@@ -176,7 +193,7 @@ header {
 }
 
 
-/* 📰 BLOG GRID */
+/* BLOG GRID */
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -217,7 +234,7 @@ header {
 
 .blog-card img {
     width: 100%;
-    height: 350px;
+    height: 400px;
     object-fit: cover;
     border-radius: 15px;
     margin-bottom: 15px;
@@ -233,7 +250,7 @@ header {
     margin-bottom: 10px;
 }
 
-/* 📄 BLOG DETAIL */
+/* BLOG DETAIL */
 .blog-detail-card {
     padding: 40px;
     margin: 20px 40px;
@@ -260,14 +277,14 @@ header {
     margin: 5px;
 }
 
-/* 📝 ADD / EDIT */
+/* ADD / EDIT */
 #add-edit-blog {
     padding: 40px;
     margin: 20px 40px;
     outline: none;
 }
 
-/* 🔄 LOAD MORE */
+/* LOAD MORE */
 #load-more {
     margin: 30px auto;
     display: block;
